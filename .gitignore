@@ -3,4 +3,7 @@ __pycache__/
 
 cache/
 data/
+
 tmp/
+tmp*
+*tmp
