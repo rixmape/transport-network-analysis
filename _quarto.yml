@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: _site
+website:
+  title: "Gulugod ng Bicolandia"
+  navbar:
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "Boundaries"
+        file: 01-boundaries.ipynb
+      - text: "Transport Network"
+        file: 02-transport-network.ipynb
+      - text: "Network Metrics"
+        file: 03-network-metrics.ipynb
+      - text: "Travel Times"
+        file: 04-travel-times.ipynb
+      - text: "Storm Swaths"
+        file: 05-storm-swaths.ipynb
+      - text: "Damage Simulation"
+        file: 06-damage-simulation.ipynb
+      - text: "Critical Infrastructure"
+        file: 09-critical-infrastructure.ipynb
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    code-summary: "Show code"

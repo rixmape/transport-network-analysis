@@ -8,3 +8,6 @@ outputs/
 tmp/
 tmp*
 *tmp
+
+/.quarto/
+/_site/
