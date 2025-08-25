@@ -127,10 +127,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../01-boundaries.html"> 
 <span class="menu-text">Boundaries</span></a>
   </li>  
@@ -232,8 +228,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="import-required-libraries" class="level3">
 <h3 class="anchored" data-anchor-id="import-required-libraries">0.1 Import required libraries</h3>
 <div id="36ec2f8b" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -251,26 +245,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial <span class="im">import</span> cKDTree</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="define-global-variables" class="level3">
 <h3 class="anchored" data-anchor-id="define-global-variables">0.2 Define global variables</h3>
 <div id="9ea3b83a" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>BASE_PATH <span class="op">=</span> <span class="st">"./outputs"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(BASE_PATH):</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    os.makedirs(BASE_PATH)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="define-helper-functions" class="level3">
 <h3 class="anchored" data-anchor-id="define-helper-functions">0.3 Define helper functions</h3>
 <div id="a22a05c6" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_with_basemap(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ax: Axes,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    gdf: gpd.GeoDataFrame,</span>
@@ -298,7 +286,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        plt.savefig(filepath, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span>
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 </section>
@@ -307,14 +294,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="download-data-from-hdx" class="level3">
 <h3 class="anchored" data-anchor-id="download-data-from-hdx">1.1 Download data from HDX</h3>
 <div id="96640df5" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>gdf_boundaries <span class="op">=</span> gpd.read_file(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"https://data.humdata.org/dataset/caf116df-f984-4deb-85ca-41b349d3f313/resource/314cbaea-c7a0-4ce9-a4ea-e5af2a788ac1/download/phl_adm_psa_namria_20231106_gdb.gdb.zip"</span>,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    layer<span class="op">=</span><span class="st">"phl_admbnda_adm3_psa_namria_20231106"</span>,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>gdf_boundaries.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
@@ -453,15 +437,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="limit-coverage-to-bicol-region" class="level3">
 <h3 class="anchored" data-anchor-id="limit-coverage-to-bicol-region">1.2 Limit coverage to Bicol Region</h3>
 <div id="7019a08e" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> gdf_boundaries[<span class="st">"ADM1_EN"</span>].<span class="bu">str</span>.contains(<span class="st">"Bicol"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gdf_boundaries <span class="op">=</span> gdf_boundaries[mask].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="e96cecfc" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots((<span class="dv">8</span>, <span class="dv">8</span>)<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>gdf_boundaries.plot(</span>
@@ -477,7 +456,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Town Boundaries in Bicol Region"</span>,</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"boundaries.png"</span>,</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -490,12 +468,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="select-relevant-columns" class="level3">
 <h3 class="anchored" data-anchor-id="select-relevant-columns">1.3 Select relevant columns</h3>
 <div id="79ecf77b" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gdf_boundaries <span class="op">=</span> gdf_boundaries[[<span class="st">"ADM3_EN"</span>, <span class="st">"ADM2_EN"</span>, <span class="st">"geometry"</span>]]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gdf_boundaries <span class="op">=</span> gdf_boundaries.rename(columns<span class="op">=</span>{<span class="st">"ADM3_EN"</span>: <span class="st">"town"</span>, <span class="st">"ADM2_EN"</span>: <span class="st">"province"</span>})</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gdf_boundaries.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -550,8 +525,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="format-town-names" class="level3">
 <h3 class="anchored" data-anchor-id="format-town-names">1.4 Format town names</h3>
 <div id="1e626438" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gdf_boundaries[<span class="st">"town"</span>] <span class="op">=</span> gdf_boundaries[<span class="st">"town"</span>].<span class="bu">str</span>.replace(<span class="vs">r"</span><span class="dv">\s</span><span class="op">*</span><span class="ch">\(</span><span class="dv">.</span><span class="op">*</span><span class="ch">\)</span><span class="vs">"</span>, <span class="st">""</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> gdf_boundaries[<span class="st">"town"</span>].<span class="bu">str</span>.startswith(<span class="st">"City of "</span>, na<span class="op">=</span><span class="va">False</span>)</span>
@@ -559,7 +532,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>gdf_boundaries.loc[_, <span class="st">"town"</span>] <span class="op">=</span> gdf_boundaries[<span class="st">"town"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="ss">f"</span><span class="sc">{</span>x<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss"> City"</span>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>gdf_boundaries[<span class="st">"town"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>array(['Bacacay', 'Camalig', 'Daraga', 'Guinobatan', 'Jovellar',
        'Legazpi City', 'Libon', 'Ligao City', 'Malilipot', 'Malinao',
@@ -586,18 +558,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="6284751d" class="cell" data-execution_count="10">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>gdf_boundaries.to_file(os.path.join(BASE_PATH, <span class="st">"boundaries.gpkg"</span>), driver<span class="op">=</span><span class="st">"GPKG"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 </section>
 <section id="build-the-transport-network" class="level2">
 <h2 class="anchored" data-anchor-id="build-the-transport-network">2 Build the transport network</h2>
 <div id="ae33cd90" class="cell" data-execution_count="11">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_labeled_undirected_graph(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    G: nx.MultiDiGraph,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    mode: <span class="bu">str</span>,</span>
@@ -610,13 +577,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        data[<span class="st">"mode"</span>] <span class="op">=</span> mode</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="download-road-network-from-osm" class="level3">
 <h3 class="anchored" data-anchor-id="download-road-network-from-osm">2.1 Download road network from OSM</h3>
 <div id="2ce145c6" class="cell" data-execution_count="12">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>graph_roads <span class="op">=</span> ox.graph_from_place(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bicol Region"</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    network_type<span class="op">=</span><span class="st">"drive_service"</span>,</span>
@@ -627,14 +591,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>graph_roads <span class="op">=</span> get_labeled_undirected_graph(graph_roads, <span class="st">"road"</span>)</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(graph_roads.nodes), <span class="bu">len</span>(graph_roads.edges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>(446869, 460990)</code></pre>
 </div>
 </div>
 <div id="5256be01" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots((<span class="dv">8</span>, <span class="dv">8</span>)<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ox.plot_graph(</span>
@@ -653,7 +614,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Road Network in Bicol Region"</span>,</span>
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"road_network.png"</span>,</span>
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -663,17 +623,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="f84a7ff7" class="cell" data-execution_count="14">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ox.save_graphml(graph_roads, filepath<span class="op">=</span>os.path.join(BASE_PATH, <span class="st">"road_network.graphml"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="identify-accessible-towns-by-road" class="level3">
 <h3 class="anchored" data-anchor-id="identify-accessible-towns-by-road">2.2 Identify accessible towns by road</h3>
 <div id="8e2a867a" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_accessible_towns(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    graph: nx.Graph,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    gdf: gpd.GeoDataFrame,</span>
@@ -743,11 +698,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>    plot_with_basemap(ax<span class="op">=</span>ax, gdf<span class="op">=</span>gdf, title<span class="op">=</span>title, filename<span class="op">=</span>filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="fe9ebcb3" class="cell" data-execution_count="16">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>origin_town <span class="op">=</span> <span class="st">"Legazpi City"</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>column <span class="op">=</span> <span class="st">"initial_access"</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -764,7 +716,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="ss">f"Town Accessibility from </span><span class="sc">{</span>origin_town<span class="sc">}</span><span class="ss"> via Road Network"</span>,</span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"initial_accessibility_map.png"</span>,</span>
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -777,8 +728,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="download-ferry-routes-from-osm" class="level3">
 <h3 class="anchored" data-anchor-id="download-ferry-routes-from-osm">2.3 Download ferry routes from OSM</h3>
 <div id="86ea86a4" class="cell" data-execution_count="17">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>graph_ferry <span class="op">=</span> ox.graph_from_place(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bicol Region"</span>,</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    custom_filter<span class="op">=</span><span class="st">'["route"="ferry"]'</span>,</span>
@@ -789,14 +738,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>graph_ferry <span class="op">=</span> get_labeled_undirected_graph(graph_ferry, <span class="st">"ferry"</span>)</span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(graph_ferry.nodes), <span class="bu">len</span>(graph_ferry.edges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>(1087, 1060)</code></pre>
 </div>
 </div>
 <div id="1ef57499" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots((<span class="dv">8</span>, <span class="dv">8</span>)<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ox.plot_graph(</span>
@@ -815,7 +761,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Ferry Network in Bicol Region"</span>,</span>
 <span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"ferry_network.png"</span>,</span>
 <span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -825,17 +770,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="98ebb8f6" class="cell" data-execution_count="19">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ox.save_graphml(graph_ferry, filepath<span class="op">=</span>os.path.join(BASE_PATH, <span class="st">"ferry_network.graphml"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="merge-the-networks" class="level3">
 <h3 class="anchored" data-anchor-id="merge-the-networks">2.4 Merge the networks</h3>
 <div id="4425dc7b" class="cell" data-execution_count="20">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> merge_networks(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    graph_roads: nx.MultiDiGraph,</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    graph_ferry: nx.MultiDiGraph,</span>
@@ -874,45 +814,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>        graph.remove_nodes_from(terminal_nodes_to_remove)</span>
 <span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="535c0c13" class="cell" data-execution_count="21">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>graph_merged <span class="op">=</span> merge_networks(graph_roads, graph_ferry)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>graph_merged <span class="op">=</span> remove_isolated_ferry_nodes(graph_merged)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>graph_merged.number_of_nodes(), graph_merged.number_of_edges()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>(447510, 462305)</code></pre>
 </div>
 </div>
 <div id="5c3b1fe1" class="cell" data-execution_count="22">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ox.save_graphml(graph_merged, os.path.join(BASE_PATH, <span class="st">"merged_network_full.graphml"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="simplify-the-merged-network" class="level3">
 <h3 class="anchored" data-anchor-id="simplify-the-merged-network">2.5 Simplify the merged network</h3>
 <div id="04a2f23f" class="cell" data-execution_count="23">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>graph_merged <span class="op">=</span> nx.MultiDiGraph(graph_merged)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>graph_merged <span class="op">=</span> ox.simplify_graph(graph_merged)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>graph_merged <span class="op">=</span> graph_merged.to_undirected()</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>graph_merged.number_of_nodes(), graph_merged.number_of_edges()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>(56932, 71895)</code></pre>
 </div>
 </div>
 <div id="7b92c0c7" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots((<span class="dv">8</span>, <span class="dv">8</span>)<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>gdf_edges <span class="op">=</span> ox.graph_to_gdfs(graph_merged, nodes<span class="op">=</span><span class="va">False</span>)</span>
@@ -937,7 +865,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Integrated Road and Ferry Network in Bicol Region"</span>,</span>
 <span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"merged_network.png"</span>,</span>
 <span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -947,17 +874,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="2b5116a7" class="cell" data-execution_count="25">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ox.save_graphml(graph_merged, os.path.join(BASE_PATH, <span class="st">"merged_network_simplified.graphml"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="identify-accessible-towns-by-road-and-ferry" class="level3">
 <h3 class="anchored" data-anchor-id="identify-accessible-towns-by-road-and-ferry">2.6 Identify accessible towns by road and ferry</h3>
 <div id="82b94fd4" class="cell" data-execution_count="26">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>column <span class="op">=</span> <span class="st">"final_access"</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>gdf_boundaries[column] <span class="op">=</span> get_accessible_towns(</span>
@@ -973,7 +895,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="ss">f"Town Accessibility from </span><span class="sc">{</span>origin_town<span class="sc">}</span><span class="ss"> via Road and Ferry Network"</span>,</span>
 <span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"final_accessibility_map.png"</span>,</span>
 <span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -983,18 +904,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cf803211" class="cell" data-execution_count="27">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>gdf_boundaries.to_file(os.path.join(BASE_PATH, <span class="st">"boundaries_with_accessibility.gpkg"</span>), driver<span class="op">=</span><span class="st">"GPKG"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 </section>
 <section id="analyze-network-properties" class="level2">
 <h2 class="anchored" data-anchor-id="analyze-network-properties">3 Analyze network properties</h2>
 <div id="112b9e85" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_choropleth(</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    ax: Axes,</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    gdf: gpd.GeoDataFrame,</span>
@@ -1031,13 +947,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>    plot_with_basemap(ax<span class="op">=</span>ax, gdf<span class="op">=</span>gdf, title<span class="op">=</span>title, filename<span class="op">=</span>filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="visualize-node-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="visualize-node-distribution">3.1 Visualize node distribution</h3>
 <div id="36ecab4f" class="cell" data-execution_count="29">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_node_count_by_town(</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    graph: nx.Graph,</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    gdf_towns: gpd.GeoDataFrame,</span>
@@ -1057,7 +970,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>gdf_node_counts <span class="op">=</span> get_node_count_by_town(graph_merged, gdf_boundaries)</span>
 <span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>gdf_node_counts[[<span class="st">"town"</span>, <span class="st">"node_count"</span>]].sort_values(by<span class="op">=</span><span class="st">"node_count"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <div>
 
@@ -1128,8 +1040,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="4cac9997" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots((<span class="dv">8</span>, <span class="dv">8</span>)<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>plot_choropleth(</span>
@@ -1140,7 +1050,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"Greys"</span>,</span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"node_count_map.png"</span>,</span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1150,18 +1059,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="7abe2724" class="cell" data-execution_count="31">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>gdf_node_counts <span class="op">=</span> gdf_node_counts[[<span class="st">"town"</span>, <span class="st">"province"</span>, <span class="st">"node_count"</span>]]</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>gdf_node_counts.to_csv(os.path.join(BASE_PATH, <span class="st">"node_counts.csv"</span>), index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="compute-centrality-measures" class="level3">
 <h3 class="anchored" data-anchor-id="compute-centrality-measures">3.2 Compute centrality measures</h3>
 <div id="2023fa43" class="cell" data-execution_count="32">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> networkx_to_igraph(nx_graph: nx.Graph) <span class="op">-&gt;</span> ig.Graph:</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    nx_nodes <span class="op">=</span> <span class="bu">list</span>(nx_graph.nodes)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    node_index <span class="op">=</span> {node: idx <span class="cf">for</span> idx, node <span class="kw">in</span> <span class="bu">enumerate</span>(nx_nodes)}</span>
@@ -1174,11 +1078,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>graph_ig, node_index <span class="op">=</span> networkx_to_igraph(graph_merged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="9b3900b2" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># df_centrality = pd.read_csv(os.path.join(BASE_PATH, "node_metrics.csv"))</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>centralities <span class="op">=</span> {</span>
@@ -1190,7 +1091,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>df_centrality <span class="op">=</span> pd.DataFrame(centralities)</span>
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>df_centrality.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="34">
 <div>
 
@@ -1248,17 +1148,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="b4fd773f" class="cell" data-execution_count="35">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df_centrality.to_csv(os.path.join(BASE_PATH, <span class="st">"node_metrics.csv"</span>), index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="compute-aggregate-metrics" class="level3">
 <h3 class="anchored" data-anchor-id="compute-aggregate-metrics">3.4 Compute aggregate metrics</h3>
 <div id="982dcafb" class="cell" data-execution_count="36">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_town_metrics(</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    graph: Graph,</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    gdf_towns: gpd.GeoDataFrame,</span>
@@ -1279,11 +1174,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>gdf_town_metrics <span class="op">=</span> get_town_metrics(graph_merged, gdf_boundaries, df_centrality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="245e72bf" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gdf_town_metrics.sort_values(by<span class="op">=</span><span class="st">"degree"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)[[<span class="st">"town"</span>, <span class="st">"province"</span>, <span class="st">"degree"</span>]])</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots((<span class="dv">8</span>, <span class="dv">8</span>)<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
@@ -1296,7 +1188,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"Greens"</span>,</span>
 <span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"degree_centrality_map.png"</span>,</span>
 <span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            town         province    degree
 58  Presentacion    Camarines Sur  0.000051
@@ -1319,8 +1210,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="dd14ce2d" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gdf_town_metrics.sort_values(by<span class="op">=</span><span class="st">"betweenness"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)[[<span class="st">"town"</span>, <span class="st">"province"</span>, <span class="st">"betweenness"</span>]])</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots((<span class="dv">8</span>, <span class="dv">8</span>)<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
@@ -1333,7 +1222,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"Oranges"</span>,</span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"betweenness_centrality_map.png"</span>,</span>
 <span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>         town       province  betweenness
 12  Pio Duran          Albay     0.027135
@@ -1356,8 +1244,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="d5ddc7d9" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gdf_town_metrics.sort_values(by<span class="op">=</span><span class="st">"closeness"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)[[<span class="st">"town"</span>, <span class="st">"province"</span>, <span class="st">"closeness"</span>]])</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots((<span class="dv">8</span>, <span class="dv">8</span>)<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
@@ -1370,7 +1256,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
 <span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"closeness_centrality_map.png"</span>,</span>
 <span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>          town       province  closeness
 6        Libon          Albay   0.006863
@@ -1470,7 +1355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/rixmape\.github\.io\/transport-network-analysis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

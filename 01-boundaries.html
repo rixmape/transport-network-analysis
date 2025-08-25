@@ -127,10 +127,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="./01-boundaries.html" aria-current="page"> 
 <span class="menu-text">Boundaries</span></a>
   </li>  
@@ -205,34 +201,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>This notebook prepares the study area’s geographical data. It downloads Philippine administrative boundaries, filters them to isolate the Bicol Region, and cleans the town names before saving the data.</p>
 <section id="preliminaries" class="level2">
 <h2 class="anchored" data-anchor-id="preliminaries">0 Preliminaries</h2>
 <div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:2065,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752491626922,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-execution_count="1">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextily <span class="im">as</span> cx</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.axes <span class="im">import</span> Axes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:516,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752491627435,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-execution_count="2">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>BASE_PATH <span class="op">=</span> os.path.join(<span class="st">"."</span>, <span class="st">"outputs"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(BASE_PATH):</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    os.makedirs(BASE_PATH)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="load-data-from-humanitarian-data-exchange" class="level2">
 <h2 class="anchored" data-anchor-id="load-data-from-humanitarian-data-exchange">1 Load data from <a href="https://data.humdata.org/dataset/cod-ab-phl">Humanitarian Data Exchange</a></h2>
 <div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:59691,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752491687131,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-outputid="a6826910-358c-41bb-fe82-b86cdbb0efe6" data-execution_count="3">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> (</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://data.humdata.org/dataset/caf116df-f984-4deb-85ca-41b349d3f313/resource/"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"314cbaea-c7a0-4ce9-a4ea-e5af2a788ac1/download/phl_adm_psa_namria_20231106_gdb.gdb.zip"</span></span>
@@ -240,7 +229,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>gdf_bounds <span class="op">=</span> gpd.read_file(filename, layer<span class="op">=</span><span class="st">"phl_admbnda_adm3_psa_namria_20231106"</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>gdf_bounds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/ainz/Code/transport-network-analysis/.venv/lib64/python3.13/site-packages/pyogrio/raw.py:198: RuntimeWarning: organizePolygons() received a polygon with more than 100 parts.  The processing may be really slow.  You can skip the processing by setting METHOD=SKIP.
   return ogr_read(</code></pre>
@@ -383,15 +371,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="limit-coverage-to-bicol-region" class="level2">
 <h2 class="anchored" data-anchor-id="limit-coverage-to-bicol-region">2 Limit coverage to Bicol Region</h2>
 <div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:3,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752491687138,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-execution_count="4">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gdf_bounds <span class="op">=</span> gdf_bounds[gdf_bounds[<span class="st">"ADM1_EN"</span>].<span class="bu">str</span>.contains(<span class="st">"Bicol"</span>)]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gdf_bounds <span class="op">=</span> gdf_bounds.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:2488,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752492151129,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-outputid="94f1eb45-021f-46ab-e55a-ded6c90f1bdf" data-execution_count="5">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>gdf_bounds.plot(ax<span class="op">=</span>ax, edgecolor<span class="op">=</span><span class="st">"white"</span>, facecolor<span class="op">=</span><span class="st">"seagreen"</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
@@ -416,7 +399,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>plt.savefig(filepath, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -429,12 +411,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="select-relevant-columns" class="level2">
 <h2 class="anchored" data-anchor-id="select-relevant-columns">3 Select relevant columns</h2>
 <div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:1666,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752491692384,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-outputid="187fa250-936f-4e40-c38b-3139187e2f5d" data-execution_count="6">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gdf_bounds <span class="op">=</span> gdf_bounds[[<span class="st">"ADM3_EN"</span>, <span class="st">"ADM2_EN"</span>, <span class="st">"geometry"</span>]]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gdf_bounds <span class="op">=</span> gdf_bounds.rename(columns<span class="op">=</span>{<span class="st">"ADM3_EN"</span>: <span class="st">"town"</span>, <span class="st">"ADM2_EN"</span>: <span class="st">"province"</span>})</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gdf_bounds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
@@ -489,8 +468,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="format-town-names" class="level2">
 <h2 class="anchored" data-anchor-id="format-town-names">4 Format town names</h2>
 <div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:9,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752491692418,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-outputid="a7eff635-4467-4f11-e8b2-9f701d364645" data-execution_count="7">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gdf_bounds[<span class="st">"town"</span>] <span class="op">=</span> gdf_bounds[<span class="st">"town"</span>].<span class="bu">str</span>.replace(<span class="vs">r"</span><span class="dv">\s</span><span class="op">*</span><span class="ch">\(</span><span class="dv">.</span><span class="op">*</span><span class="ch">\)</span><span class="vs">"</span>, <span class="st">""</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> gdf_bounds[<span class="st">"town"</span>].<span class="bu">str</span>.startswith(<span class="st">"City of "</span>, na<span class="op">=</span><span class="va">False</span>)</span>
@@ -498,7 +475,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>gdf_bounds.loc[mask, <span class="st">"town"</span>] <span class="op">=</span> gdf_bounds[<span class="st">"town"</span>] <span class="op">+</span> <span class="st">" City"</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>gdf_bounds[<span class="st">"town"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>array(['Bacacay', 'Camalig', 'Daraga', 'Guinobatan', 'Jovellar',
        'Legazpi City', 'Libon', 'Ligao City', 'Malilipot', 'Malinao',
@@ -528,11 +504,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="save-data" class="level2">
 <h2 class="anchored" data-anchor-id="save-data">5 Save data</h2>
 <div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:7595,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752491700015,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-execution_count="8">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>filepath <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"boundaries.gpkg"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gdf_bounds.to_file(filepath, driver<span class="op">=</span><span class="st">"GPKG"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 
 
@@ -611,7 +584,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/rixmape\.github\.io\/transport-network-analysis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

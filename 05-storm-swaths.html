@@ -127,10 +127,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./01-boundaries.html"> 
 <span class="menu-text">Boundaries</span></a>
   </li>  
@@ -205,11 +201,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>This notebook processes historical storm data to generate potential damage areas. It filters global storm tracks that entered the Philippine Area of Responsibility and creates swath geometries based on storm radius for those intersecting the Bicol network.</p>
 <section id="setup-environment" class="level2">
 <h2 class="anchored" data-anchor-id="setup-environment">0 Setup environment</h2>
-<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:15,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752152151007,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-execution_count="15">
-<details class="code-fold">
-<summary>Show code</summary>
+<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:15,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752152151007,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextily <span class="im">as</span> cx</span>
@@ -219,27 +214,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> Point, Polygon, box</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="cell-4" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>BASE_PATH <span class="op">=</span> <span class="st">"./data"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>BOUNDARIES_FILE <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"boundaries.gpkg"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>TRANSPORT_NETWORK_FILE <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"merged_network_simplified.graphml"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>STORM_TRACKS_FILE <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"ibtracs.ALL.list.v04r01.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="load-storm-tracks-from-ibtracs" class="level2">
 <h2 class="anchored" data-anchor-id="load-storm-tracks-from-ibtracs">1 Load storm tracks from IBTrACS</h2>
 <div id="cell-6" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gdf_boundaries <span class="op">=</span> gpd.read_file(BOUNDARIES_FILE)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gdf_boundaries.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
@@ -291,8 +279,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:9320,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752150902073,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-outputid="7c7cedf5-6bdc-4f6f-f60e-72ba60c3f7eb" data-execution_count="4">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usecols <span class="op">=</span> [<span class="st">"SID"</span>, <span class="st">"SEASON"</span>, <span class="st">"NATURE"</span>, <span class="st">"LAT"</span>, <span class="st">"LON"</span>, <span class="st">"TOKYO_R30_LONG"</span>]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_storms <span class="op">=</span> pd.read_csv(STORM_TRACKS_FILE, usecols<span class="op">=</span>usecols, na_values<span class="op">=</span>[<span class="st">" "</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -301,9 +287,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df_storms <span class="op">=</span> df_storms.dropna(subset<span class="op">=</span>[<span class="st">"SID"</span>, <span class="st">"SEASON"</span>, <span class="st">"LAT"</span>, <span class="st">"LON"</span>])</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Loaded </span><span class="sc">{</span>df_storms[<span class="st">'SID'</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss"> unique storms and </span><span class="sc">{</span><span class="bu">len</span>(df_storms)<span class="sc">}</span><span class="ss"> total records."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_9643/2726862864.py:2: DtypeWarning: Columns (1,8,9,51) have mixed types. Specify dtype option on import or set low_memory=False.
+<pre><code>/tmp/ipykernel_24298/2726862864.py:2: DtypeWarning: Columns (1,8,9,51) have mixed types. Specify dtype option on import or set low_memory=False.
   df_storms = pd.read_csv(STORM_TRACKS_FILE, usecols=usecols, na_values=[" "])</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -311,12 +296,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cell-8" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>geometry <span class="op">=</span> [Point(xy) <span class="cf">for</span> xy <span class="kw">in</span> <span class="bu">zip</span>(df_storms[<span class="st">"LON"</span>], df_storms[<span class="st">"LAT"</span>])]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gdf_storms <span class="op">=</span> gpd.GeoDataFrame(df_storms, geometry<span class="op">=</span>geometry, crs<span class="op">=</span>gdf_boundaries.crs)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gdf_storms.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
@@ -395,15 +377,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="filter-storms-along-par" class="level2">
 <h2 class="anchored" data-anchor-id="filter-storms-along-par">2 Filter storms along PAR</h2>
 <div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:191,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752151089058,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-outputid="3e64b62e-1430-4acd-c343-3e24877b1bce" data-execution_count="6">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>par_coords <span class="op">=</span> [(<span class="dv">120</span>, <span class="dv">25</span>), (<span class="dv">135</span>, <span class="dv">25</span>), (<span class="dv">135</span>, <span class="dv">5</span>), (<span class="dv">115</span>, <span class="dv">5</span>), (<span class="dv">115</span>, <span class="dv">15</span>), (<span class="dv">120</span>, <span class="dv">21</span>), (<span class="dv">120</span>, <span class="dv">25</span>)]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gdf_par <span class="op">=</span> gpd.GeoDataFrame([<span class="dv">1</span>], geometry<span class="op">=</span>[Polygon(par_coords)], crs<span class="op">=</span>gdf_boundaries.crs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="cell-11" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>gdf_par.plot(ax<span class="op">=</span>ax, color<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">"firebrick"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
@@ -423,7 +400,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.savefig(filepath, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -433,21 +409,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cell-12" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sids_in_par <span class="op">=</span> gpd.sjoin(gdf_storms, gdf_par, how<span class="op">=</span><span class="st">"inner"</span>, predicate<span class="op">=</span><span class="st">"within"</span>)[<span class="st">"SID"</span>].unique()</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gdf_storms_par <span class="op">=</span> gdf_storms[gdf_storms[<span class="st">"SID"</span>].isin(sids_in_par)]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>gdf_storms_par <span class="op">=</span> gdf_storms_par[gdf_storms_par[<span class="st">"NATURE"</span>] <span class="op">==</span> <span class="st">"TS"</span>]</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Found </span><span class="sc">{</span><span class="bu">len</span>(gdf_storms_par[<span class="st">'SID'</span>].unique())<span class="sc">}</span><span class="ss"> tropical storms that passed through the PAR."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Found 2662 tropical storms that passed through the PAR.</code></pre>
 </div>
 </div>
 <div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:5691,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752151542505,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-outputid="07c1d2b4-ac5d-4306-e741-c97e1ed29ef8" data-execution_count="9">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>gdf_par.plot(ax<span class="op">=</span>ax, color<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">"firebrick"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
@@ -472,7 +443,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>plt.savefig(filepath, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -485,8 +455,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="generate-storm-swaths" class="level2">
 <h2 class="anchored" data-anchor-id="generate-storm-swaths">3 Generate storm swaths</h2>
 <div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:3738,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752151863923,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-execution_count="10">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nmi_to_meter <span class="op">=</span> <span class="dv">1852</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gdf_storms_par[<span class="st">"RADIUS_M"</span>] <span class="op">=</span> gdf_storms_par[<span class="st">"TOKYO_R30_LONG"</span>] <span class="op">*</span> nmi_to_meter</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>gdf_storms_par[<span class="st">"RADIUS_M"</span>] <span class="op">=</span> gdf_storms_par.groupby(<span class="st">"SID"</span>)[<span class="st">"RADIUS_M"</span>].ffill().bfill()</span>
@@ -506,7 +474,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>gdf_swaths[<span class="st">"geometry"</span>] <span class="op">=</span> gdf_swaths.geometry.<span class="bu">buffer</span>(<span class="dv">0</span>)  <span class="co"># Fix potential invalid geometries</span></span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>gdf_swaths.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
@@ -552,8 +519,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:3746,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752152110020,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-outputid="e6c17a42-b852-4379-93d5-619cda8d709a" data-execution_count="11">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>gdf_par.plot(ax<span class="op">=</span>ax, color<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">"firebrick"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
@@ -576,7 +541,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -586,21 +550,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cell-17" class="cell" data-execution_count="12">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> gdf_storms, swaths</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="filter-storms-that-intersect-the-transport-network" class="level2">
 <h2 class="anchored" data-anchor-id="filter-storms-that-intersect-the-transport-network">4 Filter storms that intersect the transport network</h2>
 <div id="cell-19" class="cell" data-execution_count="13">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>graph_transport <span class="op">=</span> ox.load_graphml(TRANSPORT_NETWORK_FILE)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>gdf_transport <span class="op">=</span> ox.graph_to_gdfs(graph_transport, nodes<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>gdf_transport.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
@@ -767,8 +725,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cell-20" class="cell" data-execution_count="14">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>xmin, ymin, xmax, ymax <span class="op">=</span> gdf_boundaries.total_bounds</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>crop_box <span class="op">=</span> box(xmin, ymin, xmax, ymax)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>gdf_swaths <span class="op">=</span> gpd.clip(gdf_swaths, crop_box)</span>
@@ -780,14 +736,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>gdf_storms_par <span class="op">=</span> gdf_storms_par[gdf_storms_par[<span class="st">"SID"</span>].isin(intersecting_swath_ids)]</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Filtered to </span><span class="sc">{</span><span class="bu">len</span>(intersecting_swath_ids)<span class="sc">}</span><span class="ss"> storms that intersect the Bicol transport network."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Filtered to 671 storms that intersect the Bicol transport network.</code></pre>
 </div>
 </div>
 <div id="cell-21" class="cell" data-execution_count="16">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>gdf_par.plot(ax<span class="op">=</span>ax, color<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">"firebrick"</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
@@ -863,7 +816,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>filepath <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"storm_density_heatmap.png"</span>)</span>
 <span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a>plt.savefig(filepath, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span>
 <span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -876,8 +828,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="save-data-into-file" class="level2">
 <h2 class="anchored" data-anchor-id="save-data-into-file">6 Save data into file</h2>
 <div id="cell-23" class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>img_dir <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"storm_swath_images"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>os.makedirs(img_dir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -907,11 +857,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    out_path <span class="op">=</span> os.path.join(img_dir, <span class="ss">f"</span><span class="sc">{</span>sid<span class="sc">}</span><span class="ss">.png"</span>)</span>
 <span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    plt.savefig(out_path, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span>
 <span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;executionInfo&quot;,&quot;value&quot;:{&quot;elapsed&quot;:53673,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1752152266881,&quot;user&quot;:{&quot;displayName&quot;:&quot;Rix Mape&quot;,&quot;userId&quot;:&quot;16220833041837312022&quot;},&quot;user_tz&quot;:-480}}" data-outputid="a3852ba6-61ae-47e5-a0cc-4df5e58fc2d9">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dirpath <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"storm_swath_geometries"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>os.makedirs(dirpath, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -920,7 +867,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    gdf_single_swath <span class="op">=</span> gpd.GeoDataFrame([{<span class="st">"SID"</span>: sid, <span class="st">"geometry"</span>: row[<span class="st">"geometry"</span>]}], crs<span class="op">=</span>gdf_swaths.crs)</span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    filepath <span class="op">=</span> os.path.join(dirpath, <span class="ss">f"</span><span class="sc">{</span>sid<span class="sc">}</span><span class="ss">.gpkg"</span>)</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    gdf_single_swath.to_file(filepath, driver<span class="op">=</span><span class="st">"GPKG"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 
 
@@ -999,7 +945,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/rixmape\.github\.io\/transport-network-analysis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

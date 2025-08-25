@@ -127,10 +127,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../01-boundaries.html"> 
 <span class="menu-text">Boundaries</span></a>
   </li>  
@@ -207,8 +203,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup-environment" class="level2">
 <h2 class="anchored" data-anchor-id="setup-environment">0 Setup environment</h2>
 <div id="cell-3" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
@@ -216,25 +210,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> osmnx <span class="im">as</span> ox</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> networkx <span class="im">import</span> Graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="cell-4" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>BASE_PATH <span class="op">=</span> <span class="st">"./data"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>BOUNDARIES_FILE <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"boundaries.gpkg"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>TRANSPORT_NETWORK_FILE <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"merged_network_simplified.graphml"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="load-town-boundaries" class="level2">
 <h2 class="anchored" data-anchor-id="load-town-boundaries">1 Load town boundaries</h2>
 <div id="cell-6" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gdf_boundaries <span class="op">=</span> gpd.read_file(BOUNDARIES_FILE)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gdf_boundaries.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
@@ -289,12 +276,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-transport-network" class="level2">
 <h2 class="anchored" data-anchor-id="load-transport-network">2 Load transport network</h2>
 <div id="cell-8" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>graph_transport <span class="op">=</span> ox.load_graphml(TRANSPORT_NETWORK_FILE)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gdf_nodes <span class="op">=</span> ox.graph_to_gdfs(graph_transport, edges<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>gdf_nodes.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -390,18 +374,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="compute-centrality-measures-for-all-nodes" class="level2">
 <h2 class="anchored" data-anchor-id="compute-centrality-measures-for-all-nodes">3 Compute centrality measures for all nodes</h2>
 <div id="cell-10" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>filepath <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"centrality_measures.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="cell-11" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gdf_nodes[<span class="st">"degree"</span>] <span class="op">=</span> gdf_nodes.index.<span class="bu">map</span>(nx.degree_centrality(graph_transport))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gdf_nodes[[<span class="st">"degree"</span>]].to_csv(filepath)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>gdf_nodes[<span class="st">"degree"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>count    56932.000000
 mean         0.000044
@@ -415,12 +393,9 @@ Name: degree, dtype: float64</code></pre>
 </div>
 </div>
 <div id="cell-12" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gdf_nodes[<span class="st">"closeness"</span>] <span class="op">=</span> gdf_nodes.index.<span class="bu">map</span>(nx.closeness_centrality(graph_transport))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gdf_nodes[[<span class="st">"degree"</span>, <span class="st">"closeness"</span>]].to_csv(filepath)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>gdf_nodes[<span class="st">"closeness"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>count    56932.000000
 mean         0.004952
@@ -434,12 +409,9 @@ Name: closeness, dtype: float64</code></pre>
 </div>
 </div>
 <div id="cell-13" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>gdf_nodes[<span class="st">"betweenness"</span>] <span class="op">=</span> gdf_nodes.index.<span class="bu">map</span>(nx.betweenness_centrality(graph_transport))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gdf_nodes[[<span class="st">"degree"</span>, <span class="st">"closeness"</span>, <span class="st">"betweenness"</span>]].to_csv(filepath)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>gdf_nodes[<span class="st">"betweenness"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>count    56932.000000
 mean         0.003582
@@ -456,8 +428,6 @@ Name: betweenness, dtype: float64</code></pre>
 <section id="compute-average-metrics-for-each-town" class="level2">
 <h2 class="anchored" data-anchor-id="compute-average-metrics-for-each-town">4 Compute average metrics for each town</h2>
 <div id="cell-15" class="cell" data-execution_count="12">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_town_metrics(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    town_name: <span class="bu">str</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    boundaries_gdf: gpd.GeoDataFrame,</span>
@@ -487,11 +457,8 @@ Name: betweenness, dtype: float64</code></pre>
 <span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># town_metrics["avg_path_length"] = nx.average_shortest_path_length(subgraph_for_analysis)</span></span>
 <span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> town_metrics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div id="cell-16" class="cell" data-execution_count="13">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>all_town_metrics <span class="op">=</span> [</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    calculate_town_metrics(town_name, gdf_boundaries, gdf_nodes.copy(), graph_transport)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> town_name <span class="kw">in</span> <span class="bu">sorted</span>(gdf_boundaries[<span class="st">"town"</span>].unique())</span>
@@ -499,7 +466,6 @@ Name: betweenness, dtype: float64</code></pre>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>df_town_metrics <span class="op">=</span> pd.DataFrame(all_town_metrics).set_index(<span class="st">"town"</span>)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>df_town_metrics.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
@@ -571,11 +537,8 @@ Name: betweenness, dtype: float64</code></pre>
 </div>
 </div>
 <div id="cell-17" class="cell" data-execution_count="14">
-<details class="code-fold">
-<summary>Show code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>filepath <span class="op">=</span> os.path.join(BASE_PATH, <span class="st">"town_metrics.csv"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df_town_metrics.to_csv(filepath, index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 
 
@@ -654,7 +617,7 @@ Name: betweenness, dtype: float64</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/rixmape\.github\.io\/transport-network-analysis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

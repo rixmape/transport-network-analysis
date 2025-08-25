@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -88,10 +88,6 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Home</span></a>
-  </li>  
   <li class="nav-item">
     <a class="nav-link" href="./01-boundaries.html"> 
 <span class="menu-text">Boundaries</span></a>
@@ -131,15 +127,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#identifying-critical-corridors-in-the-bicol-transport-network-for-typhoon-resilience" id="toc-identifying-critical-corridors-in-the-bicol-transport-network-for-typhoon-resilience" class="nav-link active" data-scroll-target="#identifying-critical-corridors-in-the-bicol-transport-network-for-typhoon-resilience">Identifying Critical Corridors in the Bicol Transport Network for Typhoon Resilience</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -164,6 +152,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="identifying-critical-corridors-in-the-bicol-transport-network-for-typhoon-resilience" class="level2">
 <h2 class="anchored" data-anchor-id="identifying-critical-corridors-in-the-bicol-transport-network-for-typhoon-resilience">Identifying Critical Corridors in the Bicol Transport Network for Typhoon Resilience</h2>
+<p><img src="choropleths.png" class="img-fluid"></p>
 <p>This research addresses the vulnerability of transportation network in the disaster-prone Bicol peninsula of the Philippines. The central question is how to identify the most critical infrastructure within this complex network to ensure the efficiency of relief operations during and after a catastrophic event. This study matters because it provides a data-driven methodology for prioritizing infrastructure investment and pre-positioning disaster response resources, moving beyond generalized risk assessments to a targeted, network-aware strategy. The approach involved constructing a comprehensive multi-modal transport graph of the region’s 114 municipalities, integrating road and ferry data. We then simulated network disruptions by systematically removing nodes within 671 historical storm swaths, guided by centrality metrics (betweenness, degree, closeness) to measure the resulting decline in logistical efficiency. The analysis revealed that the network’s integrity is disproportionately dependent on a small subset of nodes with high betweenness centrality, which function as critical bridges. The targeted removal of just 1-2% of these nodes triggered a catastrophic failure in delivery efficiency, while the removal of other node types had a far less severe impact. These findings provide a crucial evidence base for policymakers, enabling a shift toward targeted infrastructure hardening. By identifying and mapping the specific corridors most vital to regional connectivity—primarily in the provinces of Camarines Sur and Albay—this research offers a precise framework for enhancing resilience and optimizing humanitarian logistics in the face of recurring natural disasters.</p>
 
 
@@ -242,7 +231,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/rixmape\.github\.io\/transport-network-analysis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
