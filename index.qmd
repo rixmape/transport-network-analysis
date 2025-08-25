@@ -1,5 +1,8 @@
 ---
 title: "Gulugod ng Bicolandia"
+format:
+    html:
+        toc: false
 ---
 
 ```{=markdown}
