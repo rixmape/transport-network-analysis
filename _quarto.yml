@@ -5,8 +5,6 @@ website:
   title: "Gulugod ng Bicolandia"
   navbar:
     left:
-      - text: "Home"
-        file: index.qmd
       - text: "Boundaries"
         file: 01-boundaries.ipynb
       - text: "Transport Network"
